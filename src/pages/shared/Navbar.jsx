@@ -1,16 +1,27 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../../context/AuthContext/AuthContext";
-
+import logo from "../../assets/logo.png"
 
 const Navbar = () => {
 
 
-  const {user}=useContext(AuthContext);
+  const {user,  signOutUser}=useContext(AuthContext);
+  const handleSignOut=()=>{
+    signOutUser()
+    .then(()=>{
+      console.log('successful sign out')
+    })
+    .catch(error =>{
+      console.log("failed to sign out.stay here. dont leave me alone")
+    })
+  }
 
     const links=<>
-     <li><a>Home</a></li>  
-     <li><a>About</a></li>
+     <li><NavLink to="/">Home</NavLink></li>  
+     <li><NavLink to="about">About</NavLink></li>  
+     <li><NavLink to="user">User</NavLink></li>  
+   
     </>
     return (
       <div className="bg-base-100 fixed w-full z-50 ">
@@ -37,7 +48,10 @@ const Navbar = () => {
              {links}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <a className="btn btn-ghost text-xl">
+            <img className="lg:w-12 w-5" src={logo} alt="" />
+            <h3 className="lg:text-3xl text-xl font-semibold md:font-bold">Job Portal</h3>
+            </a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
@@ -47,7 +61,7 @@ const Navbar = () => {
         <div className="navbar-end">
           {
             user ?<>
-             <button className="btn">Log Out</button>
+             <button onClick={handleSignOut} className="btn">Log Out</button>
             </>
             :
             <>

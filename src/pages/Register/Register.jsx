@@ -2,6 +2,7 @@ import Lottie from "lottie-react";
 import registerLottieData from "../../assets/lottie/register.json";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext/AuthContext";
+import Google from "../shared/Google";
 
 const Register = () => {
 
@@ -52,6 +53,10 @@ const Register = () => {
                 <button className="btn btn-primary">Register</button>
               </div>
             </form>
+            <div className="divider">OR</div>
+           <div>
+           <Google></Google>
+           </div>
           </div>
         </div>
       </div>
